@@ -17,14 +17,13 @@ const CustomerDetails = () => {
   const { data: IMG_DATA, isLoading : imgLoading } = useQuery({
     queryFn: () => FetchUtils.getImagesData(),
     queryKey: ["img-data", userId],
-    // refetchInterval: 10000, // Refetch every 10 seconds (10000 milliseconds)
+    refetchInterval: 10000, // Refetch every 10 seconds (10000 milliseconds)
   })
 
   if(isLoading || imgLoading){
     return <CustomerDetailsSkeleton/>
   }
 
-  console.log("userData======", userData)
 
 
 
