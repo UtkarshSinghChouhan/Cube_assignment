@@ -6,11 +6,12 @@ import { useInView } from 'react-intersection-observer';
 import Icon from './icon';
 import CustomerListSkeleton from './skeletons/customer-list-skeleton';
 import { cn } from '../utils/utils';
+import { useParams } from 'react-router-dom';
 
 const SideMenu = () => {
+  let {userId} = useParams()
   const[menuCollapsed, setMenuCollapsed] = useState<boolean>(false)
   const [intentionalLoader, setIntentionalLoader] = useState<boolean>(true)
-
   const {ref, inView} = useInView()
 
   
@@ -54,6 +55,12 @@ const SideMenu = () => {
       setIntentionalLoader(false)
     }, 1000)
   },[])
+
+  useEffect(() => {
+    if(window.innerWidth < 1280){
+      setMenuCollapsed(false)
+    }
+  },[userId])
 
 
   if(isLoading || intentionalLoader){
