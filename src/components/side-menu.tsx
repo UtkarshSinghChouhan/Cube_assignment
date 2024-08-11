@@ -63,15 +63,15 @@ const SideMenu = () => {
   return (
 
     <>
-      <nav className={cn("absolute transition-[width] top-0 bottom-0 scroll-hidden w-4 flex flex-col pr-1 gap-1 overflow-y-auto bg-white dark:bg-fs-darktheme-bg-dark", menuCollapsed && "w-[350px]")}>
+      <nav className={cn("absolute transition-[width] top-0 bottom-0 scroll-hidden w-5 flex flex-col pr-1 gap-1 overflow-y-auto bg-white dark:bg-fs-darktheme-bg-dark", menuCollapsed && "w-[350px]")}>
 
         {/* Menu Toggle */}
-        <button onClick={() => setMenuCollapsed(pre => !pre)} className='z-50 sticky right-0 top-10 p-2 flex items-center justify-center w-fit rounded-full bg-fs-bg-selected dark:bg-fs-darktheme-bg border border-fs-bg-dark dark:border-fs-darktheme-border'>
+        <button onClick={() => setMenuCollapsed(pre => !pre)} className='mt-1 z-50 sticky left-0 right-0 top-1 p-2 flex items-center justify-center rounded-full bg-fs-bg-selected dark:bg-fs-darktheme-bg border border-fs-bg-dark dark:border-fs-darktheme-border'>
 
           <span className={cn('transition-transform', menuCollapsed && 'rotate-180')}>
             <Icon icon='collapse-toggle' />
           </span>
-          
+
         </button>
 
         
@@ -93,7 +93,7 @@ const SideMenu = () => {
 
 
       </nav>
-      <div className={cn(' transition-[width] w-4 shrink-0', menuCollapsed && 'sm:w-[350px]')} />
+      <div className={cn(' transition-[width] w-5 shrink-0', menuCollapsed && 'sm:w-[350px]')} />
     </>
   )
   
