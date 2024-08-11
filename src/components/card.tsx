@@ -5,7 +5,7 @@ import { cn } from "../utils/utils"
 
 const Card = ({userData} : {userData : IUser}) => {
 
-  const {firstName, lastName, id, address} = userData
+  const {firstName, lastName, id, title} = userData
   let {userId} = useParams()
   const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const Card = ({userData} : {userData : IUser}) => {
     >
 
       <h1 className="text-[18px] font-semibold dark:text-fs-darktheme-text-header">{firstName} {lastName}</h1>
-      <p className="text-[14px] leading-[16px] text-justify dark:text-fs-darktheme-text">{address}</p>
+      <p className="text-[14px] leading-[16px] text-justify dark:text-fs-darktheme-text">{title}</p>
       
     </div>
   )

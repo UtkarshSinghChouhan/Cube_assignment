@@ -30,18 +30,26 @@ const CustomerDetails = () => {
 
   return (
     <>
-      {/* Header */}
+      {/* Name */}
       <h1 className="text-3xl font-semibold">
         <span className="text-fs-bg-selected dark:text-fs-darktheme-text">{userData.firstName}</span>{' '} 
         <span className="text-fs-bg-dark dark:text-fs-darktheme-text-header">{userData.lastName}</span>
       </h1>
 
-      <div className="bg-purple-300 line-clamp-2">
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officia, odit nobis. Eius eaque beatae, et dolores officiis mollitia libero expedita. Nisi quas maxime necessitatibus praesentium.
+      {/*Title Address */}
+      <div className="text-fs-bg-selected dark:text-fs-darktheme-text mt-2 space-y-1">
+        <p>{`👷🏻‍♀️ ${userData.company.title}`}</p>
+        <p>{`🌎 ${userData.address.address}, ${userData.address.city}, ${userData.address.state}, ${userData.address.country}`}</p>
+      </div>
+
+      {/* Photos Title */}
+      <div className=" w-full mt-20 flex items-center gap-5">
+        <h1 className="text-7xl font-bold text-fs-bg-dark dark:text-fs-darktheme-text-header">{`Photos`}</h1>
+        <div className="mt-3 h-[2px] flex-1 bg-fs-bg-selected dark:bg-fs-darktheme-text-header rounded-full"></div>
       </div>
 
       {/* Image Grid */}
-      <div className="mt-20 grid grid-cols-fs-image w-full justify-evenly lg:justify-between gap-x-11 gap-y-12">
+      <div className="mt-10 grid grid-cols-fs-image w-full justify-evenly lg:justify-between gap-x-11 gap-y-12">
 
         {IMG_DATA?.slice(0,9).map((imgData : any) => {
           return (

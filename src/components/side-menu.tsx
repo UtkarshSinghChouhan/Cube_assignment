@@ -1,12 +1,15 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { FetchUtils } from '../utils/fetch-utils'
 import Card from './card'
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import Icon from './icon';
 import CustomerListSkeleton from './skeletons/customer-list-skeleton';
+import { cn } from '../utils/utils';
 
 const SideMenu = () => {
+  const[menuCollapsed, setMenuCollapsed] = useState<boolean>(false)
+  const [intentionalLoader, setIntentionalLoader] = useState<boolean>(true)
 
   const {ref, inView} = useInView()
 
@@ -39,26 +42,59 @@ const SideMenu = () => {
 
   },[fetchNextPage, inView])
 
+  useEffect(() => {
+    // SideMenu collapsed Logic
+    if(window.innerWidth >= 1280){
+      setMenuCollapsed(true)
+    }
 
-  if(isLoading && !!data){
+
+    // Intentional Loader For UX purposes
+    setTimeout(() => {
+      setIntentionalLoader(false)
+    }, 1000)
+  },[])
+
+
+  if(isLoading || intentionalLoader){
     return <CustomerListSkeleton />
   }
 
   return (
-    <nav className="scroll-hidden w-[350px] flex flex-col pr-1 gap-1 overflow-y-auto bg-white dark:bg-fs-darktheme-bg-dark">
 
-      {
-        ALL_USERS?.map((userData, idx) => (
-          <Card key={idx} userData={{...userData, address : `${userData.address.city}, ${userData.address.state}, ${userData.address.country}`}} />
-        ))
-      }
+    <>
+      <nav className={cn("absolute transition-[width] top-0 bottom-0 scroll-hidden w-4 flex flex-col pr-1 gap-1 overflow-y-auto bg-white dark:bg-fs-darktheme-bg-dark", menuCollapsed && "w-[350px]")}>
 
-      {/* Loader */}
-      <div ref={ref} className='my-3 min-h-2 text-fs-dark-black dark:text-fs-darktheme-text-header flex justify-center items-center'>
-        {isFetchingNextPage && <Icon icon='loader' />}
-      </div>
+        {/* Menu Toggle */}
+        <button onClick={() => setMenuCollapsed(pre => !pre)} className='z-50 sticky right-0 top-10 p-2 flex items-center justify-center w-fit rounded-full bg-fs-bg-selected dark:bg-fs-darktheme-bg border border-fs-bg-dark dark:border-fs-darktheme-border'>
 
-    </nav>
+          <span className={cn('transition-transform', menuCollapsed && 'rotate-180')}>
+            <Icon icon='collapse-toggle' />
+          </span>
+          
+        </button>
+
+        
+        
+
+        {
+          menuCollapsed &&
+
+          <>
+            {ALL_USERS?.map((userData, idx) => (
+              <Card key={idx} userData={{...userData, title : `${userData.company.title}`}} />
+            ))}
+            {/* Loader */}
+            <div ref={ref} className='my-3 min-h-2 text-fs-dark-black dark:text-fs-darktheme-text-header flex justify-center items-center'>
+              {isFetchingNextPage && <Icon icon='loader' />}
+            </div>
+          </>
+        }
+
+
+      </nav>
+      <div className={cn(' transition-[width] w-4 shrink-0', menuCollapsed && 'sm:w-[350px]')} />
+    </>
   )
   
   

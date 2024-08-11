@@ -1,6 +1,6 @@
 const CustomerListSkeleton = () => {
   return (
-    <nav className="animate-pulse scroll-hidden w-[350px] flex flex-col pr-1 gap-1 overflow-y-auto bg-white dark:bg-fs-darktheme-bg-dark">
+    <nav className="hidden animate-pulse scroll-hidden w-[350px] xl:flex flex-col pr-1 gap-1 overflow-y-auto bg-white dark:bg-fs-darktheme-bg-dark">
       {[...new Array(10)].map((_, idx) => (
         <div
             key={idx}

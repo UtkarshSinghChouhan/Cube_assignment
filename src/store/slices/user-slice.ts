@@ -5,32 +5,23 @@ import { Theme } from '../../models/enums';
 import { ThemeVariant } from '../../models/types';
 
 interface IAllUser {
-  users : Array<IUser> | null,
   theme : Theme
 }
 
 const initialState: IAllUser = {
-  users : null,
-  theme: Theme.LIGHT
+  theme: Theme.DARK
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUsers: (state, action: PayloadAction<Array<IUser>>) => {
-      if(state.users){
-        state.users = [...state.users, ...action.payload]        
-      }else{        
-        state.users = [...action.payload]
-      }
-    },
     setTheme: (state, action: PayloadAction<ThemeVariant>) => {
         state.theme = action.payload;
     }
   },
 });
 
-export const { setUsers, setTheme } = userSlice.actions;
+export const { setTheme } = userSlice.actions;
 
 export default userSlice.reducer;
