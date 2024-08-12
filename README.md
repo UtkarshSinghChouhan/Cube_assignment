@@ -31,12 +31,12 @@ To get started with the project, follow these steps:
    ```bash
    git clone https://github.com/UtkarshSinghChouhan/cube-assignment.git
    
-3. Navigate into the project directory:
+2. Navigate into the project directory:
    
    ```bash
    cd cube-assignment
    
-4. Install dependencies:
+3. Install dependencies:
    
    ```bash
    npm install
